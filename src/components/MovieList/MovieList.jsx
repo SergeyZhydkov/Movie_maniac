@@ -25,11 +25,7 @@ const MovieList = ({ type, title, emoji }) => {
   }, [sort]);
 
   const fetchMovies = async () => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${type}?api_key=${
-        import.meta.env.VITE_APP_API_KEY
-      }`,
-    );
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${type}?api_key=345007f9ab440e5b86cef51be6397df1`);
     const data = await response.json();
     setMovies(data.results);
     setFilterMovies(data.results);
@@ -53,36 +49,19 @@ const MovieList = ({ type, title, emoji }) => {
     <section className="movie_list" id={type}>
       <header className="align_center movie_list_header">
         <h2 className="align_center movie_list_heading">
-          {title}{" "}
-          <img src={emoji} alt={`${emoji} icon`} className="navbar_emoji" />
+          {title} <img src={emoji} alt={`${emoji} icon`} className="navbar_emoji" />
         </h2>
 
         <div className="align_center movie_list_fs">
-          <FilterGroup
-            minRating={minRating}
-            onRatingClick={handleFilter}
-            ratings={[8, 7, 6]}
-          />
+          <FilterGroup minRating={minRating} onRatingClick={handleFilter} ratings={[8, 7, 6]} />
 
-          <select
-            name="by"
-            id=""
-            onChange={handleSort}
-            value={sort.by}
-            className="movie_sorting"
-          >
+          <select name="by" id="" onChange={handleSort} value={sort.by} className="movie_sorting">
             <option value="default">SortBy</option>
             <option value="release_date">Date</option>
             <option value="vote_average">Rating</option>
           </select>
 
-          <select
-            name="order"
-            id=""
-            onChange={handleSort}
-            value={sort.order}
-            className="movie_sorting"
-          >
+          <select name="order" id="" onChange={handleSort} value={sort.order} className="movie_sorting">
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
